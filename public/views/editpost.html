@@ -1,0 +1,13 @@
+<div class="container-fluid text-left" ng-controller="PostCtrl">
+    <h2>Post GET API Results</h2>
+
+	    Detail Post:  {{ detailPost.title }}
+		
+		<input type="text" value="{{ detailPost.title }}" size="50"/> <br>
+		<textarea value="{{ detailPost.content }}"></textarea> <br>
+
+    <div ng-show="errorMsg != null">
+        {{ errorMsg }}
+    </div>
+
+</div>

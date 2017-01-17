@@ -1,0 +1,65 @@
+<div class="container-fluid text-left" ng-controller="PostCtrl">
+
+    <div ng-show="showList && postList != null">
+       <h3>Twitter All Tweets</h3>
+
+        <p>Found {{ postSize }} Twitter Posts </p>
+	 
+       <form name="searchForm" novalidate>
+			<p>Title:</p>
+			<input type="text" name="searchWords" data-ng-model="searchWords" placeholder="query params" required size="50"/> <br>			
+			<input type="button" value="Search" ng-click="searchTweets()" />
+		</form>
+
+        <div ng-repeat="post in postList">
+		    <a ng-click="showPostDetails(post.id)" href="#"><h5>{{ post.id }}</h5></a>
+            Tweet: {{ post.text }} <br>
+            Source: {{ post.source }} <br>
+            User name: {{ post.user.name }} <br>
+            Screen name: {{ post.user.screen_name }} <br>
+            User location: {{ post.user.location }} <br>
+            User desc: {{ post.user.description }} <br>
+            Followers: {{ post.user.followers_count }} <br>
+            Friends: {{ post.user.friends_count }} <br>
+            Post Date: {{ post.created_at }} <br>
+            Retweet Count: {{ post.retweet_count }} <br>
+            Favorite Count: {{ post.favorite_count }} <br>
+            Retweeted: {{ post.retweeted }} <br>
+            Favorited: {{ post.favorited }} <br>
+            Sensitive: {{ post.possibly_sensitive }} <br>
+            Language: {{ post.lang }} <br>
+			--------------------------------------------------
+        </div>
+    </div>
+	
+    <div ng-show="showDetail">
+       <h3><a ng-click="showPostList()" href="#">Back to All Posts</a> -> Post Details</h3>
+
+        <form name="postForm" validate>
+		
+			<input type="button" value="Cancel" ng-click="showPostList()" /> &nbsp;&nbsp;
+			<input type="button" value="Save" ng-click="updatePost(detailPost.id)" ng-disabled="postForm.title.$dirty &&
+																				   postForm.title.$invalid"/>
+			<br/>
+			<br/>
+			<p>Title:</p>
+			<input type="text" name="title" ng-model="detailPost.title" required value="{{ detailPost.title }}" size="50"/> <br>
+			<span style="color:red" ng-show="postForm.title.$dirty && postForm.title.$invalid">
+				<span ng-show="postForm.title.$error.required">Post title is required.</span>
+			</span>
+			<p>Content:</p>
+			<textarea name="content" ng-model="detailPost.content" required rows="30" cols="80">{{ detailPost.content }}</textarea> <br>
+			<span style="color:red" ng-show="postForm.content.$dirty && postForm.content.$invalid">
+				<span ng-show="postForm.content.$error.required">Post content is required.</span>
+			</span>
+			
+		</form>
+        <p>form = {{postForm}}</p>
+
+	</div>
+
+    <div ng-show="errorMsg != null">
+        {{ errorMsg }}
+    </div>
+
+</div>

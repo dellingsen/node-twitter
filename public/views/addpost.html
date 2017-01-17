@@ -1,0 +1,26 @@
+<div class="container-fluid text-left">
+
+    <div ng-controller="AddPostController">
+        <form name="postForm" validate>
+
+            <p>Title:</p>
+            <input type="text" name="title" ng-model="title" required/>
+            <span style="color:red" ng-show="postForm.title.$dirty && postForm.title.$invalid">
+            <span ng-show="postForm.title.$error.required">Post title is required.</span>
+            </span>
+            <p>Content:</p>
+            <textarea name="content" ng-model="content" required></textarea>
+            <span style="color:red" ng-show="postForm.content.$dirty && postForm.content.$invalid">
+            <span ng-show="postForm.content.$error.required">Post content is required.</span>
+            </span>
+            <br><br>
+            <button ng-click="save()" ng-disabled="postForm.title.$dirty &&
+                                                   postForm.title.$invalid">
+                Save</button>
+            <button ng-click="reset()">Reset</button>
+        </form>
+        <br><br>
+        <p>form = {{post}}</p>
+    </div>
+
+</div>
